@@ -25,15 +25,14 @@ async function run() {
       core.setOutput('result', JSON.stringify(result));
     });
     
-    if (response.status === 401){
+  } catch (error) {
+    if (error.response && error.response.status === 401){
       core.setFailed("api_key is not set. You can get is from https://app.ddosify.com");    
     }
-    else if (response.status === 403){
+    else if (error.response && error.response.status === 403){
       core.setFailed("api_key is not valid. You can get is from https://app.ddosify.com");    
     }
-
-  } catch (error) {
-    core.setFailed(error.message, error.body);
+    core.setFailed(error.message);
   }
 }
 
