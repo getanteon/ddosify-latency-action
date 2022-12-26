@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 
-
+// Run on every change: npm run prepare
 // most @actions toolkit packages have async methods
 async function run() {
   try {
