@@ -1,5 +1,5 @@
 name: 'Ddosify Latency Test'
-description: 'Wait a designated number of milliseconds'
+description: 'Ddosify Cloud Latency Testing is capable of testing the backend endpoint's latency from 60+ cities.'
 inputs:
   api_key:
     description: 'Ddosify Cloud API Key. Available in https://app.ddosify.com Account Settings'
