@@ -1,18 +1,29 @@
 const core = require('@actions/core');
-const wait = require('./wait');
 
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
+    var ddosifyHeaders = new Headers();
+    ddosifyHeaders.append("X-API-KEY", core.getInput('api_key'));
+    ddosifyHeaders.append("Content-Type", "application/json");
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
+    var raw = JSON.stringify({
+      "target": core.getInput('target'),
+      "locations": core.getInput('locations')
+    });
 
-    core.setOutput('time', new Date().toTimeString());
+    var requestOptions = {
+      method: 'POST',
+      headers: ddosifyHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch("https://api.ddosify.com/v1/latency/test/", requestOptions)
+      .then(response => response.text())
+      .then(result => core.setOutput('result', JSON.stringify(result)))
+
   } catch (error) {
     core.setFailed(error.message);
   }

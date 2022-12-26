@@ -1,13 +1,19 @@
-name: 'Wait'
+name: 'Ddosify Latency Test'
 description: 'Wait a designated number of milliseconds'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  api_key:
+    description: 'Ddosify Cloud API Key. Available in https://app.ddosify.com Account Settings'
     required: true
-    default: '1000'
+  target:
+    description: 'Target URL or IP address. Example: https://example.com'
+    required: true
+  locations:
+    description: 'Locations where the requests will sent from. Example: ["NA.US.*", "EU.FR.PR"]. Full list: https://docs.ddosify.com/cloud/api/latency-testing-api#get-supported-locations'
+    required: false
+    default: ["*"]
 outputs:
-  time: # output will be available to future steps
-    description: 'The current time after waiting'
+  result:
+    description: 'JSON formatted latency test output'
 runs:
   using: 'node16'
   main: 'dist/index.js'
