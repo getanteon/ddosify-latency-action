@@ -1,4 +1,4 @@
-name: "javascript-action CodeQL config"
+name: "ddosify-latency-action CodeQL config"
 
 paths-ignore: 
   - node_modules
