@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/ddosify-latency-action.git"
+    "url": "git+https://github.com/ddosify/ddosify-latency-action.git"
   },
   "keywords": [
     "GitHub",
@@ -23,9 +23,9 @@
   "author": "Ddosify Inc.",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/actions/ddosify-latency-action/issues"
+    "url": "https://github.com/ddosify/ddosify-latency-action/issues"
   },
-  "homepage": "https://github.com/actions/ddosify-latency-action#readme",
+  "homepage": "https://github.com/ddosify/ddosify-latency-action#readme",
   "dependencies": {
     "@actions/core": "^1.10.0"
   },
