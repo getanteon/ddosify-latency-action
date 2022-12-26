@@ -2688,23 +2688,6 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 258:
-/***/ ((module) => {
-
-let wait = function (milliseconds) {
-  return new Promise((resolve) => {
-    if (typeof milliseconds !== 'number') {
-      throw new Error('milliseconds not a number');
-    }
-    setTimeout(() => resolve("done!"), milliseconds)
-  });
-};
-
-module.exports = wait;
-
-
-/***/ }),
-
 /***/ 491:
 /***/ ((module) => {
 
@@ -2835,20 +2818,31 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(186);
-const wait = __nccwpck_require__(258);
 
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
+    var ddosifyHeaders = new Headers();
+    ddosifyHeaders.append("X-API-KEY", core.getInput('api_key'));
+    ddosifyHeaders.append("Content-Type", "application/json");
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
+    var raw = JSON.stringify({
+      "target": core.getInput('target'),
+      "locations": core.getInput('locations')
+    });
 
-    core.setOutput('time', new Date().toTimeString());
+    var requestOptions = {
+      method: 'POST',
+      headers: ddosifyHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch("https://api.ddosify.com/v1/latency/test/", requestOptions)
+      .then(response => response.text())
+      .then(result => core.setOutput('result', JSON.stringify(result)))
+
   } catch (error) {
     core.setFailed(error.message);
   }
