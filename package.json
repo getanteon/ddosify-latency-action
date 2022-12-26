@@ -20,7 +20,7 @@
     "Testing",
     "Latency"
   ],
-  "author": "Fatih Baltaci",
+  "author": "Ddosify Inc.",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/actions/ddosify-latency-action/issues"
