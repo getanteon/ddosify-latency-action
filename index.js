@@ -32,7 +32,9 @@ async function run() {
     else if (error.response && error.response.status === 403){
       core.setFailed("api_key is not valid. You can get is from https://app.ddosify.com");    
     }
-    core.setFailed(error.message);
+    else{
+      core.setFailed(error.message);
+    }
   }
 }
 
