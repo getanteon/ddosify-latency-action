@@ -4,19 +4,18 @@ const core = require('@actions/core');
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    var ddosifyHeaders = new Headers();
-    ddosifyHeaders.append("X-API-KEY", core.getInput('api_key'));
-    ddosifyHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
+    var body = JSON.stringify({
       "target": core.getInput('target'),
       "locations": core.getInput('locations')
     });
 
     var requestOptions = {
       method: 'POST',
-      headers: ddosifyHeaders,
-      body: raw,
+      headers: {
+        "X-API-KEY": core.getInput('api_key'),
+        "Content-Type": "application/json"
+      },
+      body: body,
       redirect: 'follow'
     };
 
