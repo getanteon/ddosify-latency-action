@@ -3,11 +3,14 @@ const axios = require('axios');
 
 
 // Run on every change: npm run prepare
+// most @actions toolkit packages have async methods
 async function run() {
   try {
     var body = {
-      "target": core.getInput('target'),
-      "locations": core.getInput('locations')
+      // "target": core.getInput('target'),
+      // "locations": core.getInput('locations')
+      "target": "https://app.servdown.com",
+      "locations": ["*"]
     };
 
     const response = await axios.post(
@@ -15,7 +18,8 @@ async function run() {
       body,
       {
         headers: {
-          "X-API-KEY": core.getInput('api_key'),
+          // "X-API-KEY": core.getInput('api_key'),
+          "X-API-KEY": "8e745f05-e1bd-41bf-9276-ac7689e640e6",
           "Content-Type": "application/json",
           "Accept-Encoding": "gzip,deflate,compress"
         }
@@ -23,16 +27,11 @@ async function run() {
     ).then(function (response) {
       console.log(response.data);
       core.setOutput('result', JSON.stringify(result));
-      if (response.status === 401){
-        core.setFailed("api_key is not set. You can get is from https://app.ddosify.com");    
-      }
-      else if (response.status === 403){
-        core.setFailed("api_key is not valid. You can get is from https://app.ddosify.com");    
-      }
     });
 
+
   } catch (error) {
-    core.setFailed(error.message, error.body);
+    core.setFailed(error.message);
   }
 }
 

@@ -10214,6 +10214,12 @@ async function run() {
     ).then(function (response) {
       console.log(response.data);
       core.setOutput('result', JSON.stringify(result));
+      if (response.status === 401){
+        core.setFailed("api_key is not set. You can get is from https://app.ddosify.com");    
+      }
+      else if (response.status === 403){
+        core.setFailed("api_key is not valid. You can get is from https://app.ddosify.com");    
+      }
     });
 
   } catch (error) {
