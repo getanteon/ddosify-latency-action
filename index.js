@@ -5,10 +5,10 @@ const axios = require('axios');
 // Run on every change: npm run prepare
 async function run() {
   try {
-    var body = JSON.stringify({
+    var body = {
       "target": core.getInput('target'),
-      "locations": core.getMultilineInput('locations')
-    });
+      "locations": JSON.parse(core.getInput('locations'))
+    };
 
     const response = await axios.post(
       'https://api.ddosify.com/v1/latency/test/',
