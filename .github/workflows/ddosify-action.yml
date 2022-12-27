@@ -15,3 +15,4 @@ jobs:
       with:
         api_key: ${{ secrets.DDOSIFY_API_KEY }}
         target: "https://app.servdown.com"
+        locations: ["*"]
