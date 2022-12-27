@@ -10213,7 +10213,7 @@ async function run() {
       }
     ).then(function (response) {
       console.log(response.data);
-      core.setOutput('result', JSON.stringify(result));
+      core.setOutput('result', JSON.stringify(respons.data));
     });
     
   } catch (error) {
