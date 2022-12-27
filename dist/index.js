@@ -10196,10 +10196,10 @@ const axios = __nccwpck_require__(8757);
 // Run on every change: npm run prepare
 async function run() {
   try {
-    var body = {
+    var body = JSON.stringify({
       "target": core.getInput('target'),
       "locations": core.getInput('locations')
-    };
+    });
 
     const response = await axios.post(
       'https://api.ddosify.com/v1/latency/test/',
