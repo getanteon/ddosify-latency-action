@@ -63,7 +63,7 @@ async function run() {
     for (let locKey in responseTest.data) {
       response[`${locations[locKey]} (${locKey.split(".")[0]})`] = responseTest.data[locKey]
     }
-
+    core.setOutput("result", response);
     console.table(response);
 
   } catch (error) {
