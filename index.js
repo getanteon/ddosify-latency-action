@@ -22,7 +22,7 @@ async function run() {
       }
     ).then(function (response) {
       console.log(response.data);
-      core.setOutput('result', JSON.stringify(respons.data));
+      core.setOutput('result', JSON.stringify(response.data));
     });
     
   } catch (error) {
