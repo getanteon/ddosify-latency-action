@@ -7,7 +7,7 @@ async function run() {
   try {
     var body = JSON.stringify({
       "target": core.getInput('target'),
-      "locations": core.getInput('locations')
+      "locations": core.getMultilineInput('locations')
     });
 
     const response = await axios.post(

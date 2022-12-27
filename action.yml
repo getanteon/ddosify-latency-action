@@ -10,7 +10,8 @@ inputs:
   locations:
     description: 'Locations where the requests will sent from. Example: ["NA.US.*", "EU.FR.PR"]. Full list: https://docs.ddosify.com/cloud/api/latency-testing-api#get-supported-locations'
     required: false
-    default: '["*"]'
+    default:
+      - "*"
 outputs:
   result:
     description: 'JSON formatted latency test output'
