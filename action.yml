@@ -8,7 +8,7 @@ inputs:
     description: 'Target URL or IP address. Example: https://example.com'
     required: true
   locations:
-    description: 'Locations where the requests will sent from. Example: ["NA.US.*", "EU.FR.PR"]. Full list: https://docs.ddosify.com/cloud/api/latency-testing-api#get-supported-locations'
+    description: 'Locations where the requests will sent from. Example: ["NA.US.*", "EU.FR.PR"]. Locations: https://docs.ddosify.com/cloud/api/latency-testing-api#example-usages-of-locations-object'
     required: false
     default: '["*"]'
   failIf:
@@ -20,3 +20,6 @@ outputs:
 runs:
   using: 'node16'
   main: 'dist/index.js'
+branding:
+  icon: 'share-2'
+  color: 'green'
