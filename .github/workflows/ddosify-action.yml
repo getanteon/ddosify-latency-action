@@ -1,8 +1,8 @@
 name: "Ddosify Latency Testing"
 
 on:
-  push:
-    branches: [ master ]
+  schedule:
+    - cron:  '* * * * *'
   workflow_dispatch:
 
 jobs:

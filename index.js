@@ -31,7 +31,7 @@ function getConcatenatedLocations(obj) {
 // Run on every change: npm run prepare
 async function run() {
 
-  const failIfText = core.getInput('failIf').trim(); // any>100 or NA.US.MA.BO>80
+  const failIfText = core.getInput('failIf').trim(); // any>100 or NA.US.MA.BO>80 or NA.*>90
   const target = core.getInput('target')  // https://example.com
   const locationsInput = JSON.parse(core.getInput('locations'))  // ["*"]
   const apiKey = core.getInput('api_key')
