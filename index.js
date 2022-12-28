@@ -30,12 +30,45 @@ function getConcatenatedLocations(obj) {
 
 // Run on every change: npm run prepare
 async function run() {
+
+  const failIfText = core.getInput('failIf').trim(); // any>100 or NA.US.MA.BO>80
+  const target = core.getInput('target')  // https://example.com
+  const locationsInput = JSON.parse(core.getInput('locations'))  // ["*"]
+  const apiKey = core.getInput('api_key')
+
+  const failIfArr = failIfText.split(">")
+  const failIfLocation = failIfArr[0].trim()
+  const failIfLatency = failIfArr[1].trim()
+  let failedLocations = []
+  response = {}
+  if (failIfText !== "") {
+    core.info(`\u001b[33mFail if:   ${failIfText}`)
+  }
+
+  core.info(`\u001b[33mTarget:    ${target}`)
+  core.info(`\u001b[33mLocations: ${locationsInput}`)
+
   try {
     const responseLocations = await axios.get(
       'https://api.ddosify.com/v1/latency/locations/',
       {
         headers: {
-          "X-API-KEY": core.getInput('api_key'),
+          "X-API-KEY": apiKey,
+          "Content-Type": "application/json",
+          "Accept-Encoding": "gzip,deflate,compress"
+        }
+      }
+    );
+
+    const responseTest = await axios.post(
+      'https://api.ddosify.com/v1/latency/test/',
+      {
+        "target": target,
+        "locations": locationsInput
+      },
+      {
+        headers: {
+          "X-API-KEY": apiKey,
           "Content-Type": "application/json",
           "Accept-Encoding": "gzip,deflate,compress"
         }
@@ -44,32 +77,8 @@ async function run() {
 
     const locations = getConcatenatedLocations(responseLocations.data);
 
-    const responseTest = await axios.post(
-      'https://api.ddosify.com/v1/latency/test/',
-      {
-        "target": core.getInput('target'),
-        "locations": JSON.parse(core.getInput('locations'))
-      },
-      {
-        headers: {
-          "X-API-KEY": core.getInput('api_key'),
-          "Content-Type": "application/json",
-          "Accept-Encoding": "gzip,deflate,compress"
-        }
-      }
-    );
-
-    const failIfText = core.getInput('failIf').trim(); // any>100 or NA.US.MA.BO>80
-    const failIfArr = failIfText.split(">")
-    const failIfLocation = failIfArr[0].trim()
-    const failIfLatency = failIfArr[1].trim()
-    let failedLocations = []
-    response = {}
-    if (failIfText !== "") {
-      core.info(`\u001b[33mFail if: ${failIfText}`)
-    }
     for (let locKey in responseTest.data) {
-      response[locKey+1] = { ...{ "location": locations[locKey] }, ...{ "location_code": locKey }, ...responseTest.data[locKey] }
+      response[locKey + 1] = { ...{ "location": locations[locKey] }, ...{ "location_code": locKey }, ...responseTest.data[locKey] }
       latency = responseTest.data[locKey]["latency"];
       if (failIfText !== "" && ((failIfLocation === "any" && latency > failIfLatency) || (locKey === failIfLocation && latency > failIfLatency))) {
         failedLocations.push(`${latency},${locations[locKey]},${failIfLatency}`)
