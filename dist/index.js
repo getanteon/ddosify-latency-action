@@ -10289,7 +10289,7 @@ async function run() {
         logText += `    >${failIfLatency.toString().padEnd(8)} |`
         if (latency !== "Fail" && latency > failIfLatency){
           failedLocations.push(`${latency},${locations[locKey]},${failIfLatency}`)
-          logText = "\u001b[91m" + logText + "\x1b[0m"
+          logText = "\u001b[38;2;255;0;0m" + logText + "\x1b[0m"
         }
       }
       else {
