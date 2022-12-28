@@ -65,19 +65,18 @@ async function run() {
     const failIfLatency = failIfArr[1].trim()
     let failedLocations = []
     response = {}
-    startIndex = 1
     if (failIfText !== "") {
       console.log(`Fail if: ${failIfText}`)
     }
     for (let locKey in responseTest.data) {
-      response[startIndex++] = { ...{ "location": locations[locKey] }, ...{ "location_code": locKey }, ...responseTest.data[locKey] }
+      response[locKey+1] = { ...{ "location": locations[locKey] }, ...{ "location_code": locKey }, ...responseTest.data[locKey] }
       latency = responseTest.data[locKey]["latency"];
       if (failIfText !== "" && ((failIfLocation === "any" && latency > failIfLatency) || (locKey === failIfLocation && latency > failIfLatency))) {
         failedLocations.push(`${latency},${locations[locKey]},${failIfLatency}`)
       }
     }
-    for (let failedLocation in failedLocations) {
-      const fLoc = failedLocation.split(",")
+    for (let i in failedLocations) {
+      const fLoc = failedLocations[i].split(",")
       core.error(`Latency (${fLoc[0]}) for ${fLoc[1]} is greater than ${fLoc[2]}.`);
     }
     if (failedLocations.length > 0) {
