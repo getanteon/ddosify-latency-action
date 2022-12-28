@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Ddosify Latency Test
-      uses: ddosify/ddosify-latency-action@master
+      uses: ddosify/ddosify-latency-action@v1
       with:
         api_key: ${{ secrets.DDOSIFY_API_KEY }}
         target: "https://app.servdown.com"
