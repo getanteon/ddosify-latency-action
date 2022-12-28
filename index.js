@@ -85,18 +85,18 @@ async function run() {
       response[locKey + 1] = { ...{ "location": locations[locKey] }, ...{ "location_code": locKey }, ...responseTest.data[locKey] }
       latency = responseTest.data[locKey]["latency"];
       statusCode = responseTest.data[locKey]["status_code"]
-      if (statusCode === undefined){
+      if (statusCode === undefined) {
         statusCode = "Fail"
       }
       latency = responseTest.data[locKey]["latency"]
-      if (latency === undefined){
+      if (latency === undefined) {
         latency = "Fail"
       }
       logText = `| ${locations[locKey].padEnd(20)} | ${locKey.padEnd(15)} |    ${statusCode.toString().padEnd(8)} |     ${latency.toString().padEnd(8)} |`;
 
-      if (failIfText !== "" && ((failIfLocation === "any") || (locKey === failIfLocation))) {
+      if (failIfText !== "" && ((failIfLocation === "any") || (locKey.startsWith(failIfLocation.replaceAll("*", ""))))) {
         logText += `    >${failIfLatency.toString().padEnd(8)} |`
-        if (latency !== "Fail" && latency > failIfLatency){
+        if (latency !== "Fail" && latency > failIfLatency) {
           failedLocations.push(`${latency},${locations[locKey]},${failIfLatency}`)
           logText = "\u001b[38;2;255;0;0m" + logText + "\x1b[0m"
         }
