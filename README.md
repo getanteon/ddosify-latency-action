@@ -4,10 +4,10 @@
     Ddosify Latency Testing Action
 </h1>
 
-Ddosify's Latency Observation Action allows you to measure your latency of the endpoint from 60+ cities around the world. 
+Ddosify's Latency Observation Action allows you to measure the latency of endpoints from 60+ cities around the world.
 With this action, you can track the performance of your endpoints over time and ensure that they are meeting your desired latency targets. Whether you are running a web application, a mobile backend, or any other type of service, this action can help you monitor the latency for the best user experience.
 
-Using this action is simple - just add it to your workflow and configure the request details. You can specify the `Target URL`, `Locations` and `Fail If` scenarios to fail the pipeline based on latencies. This action uses Ddosify [Latency Testing API](https://docs.ddosify.com/cloud/api/latency-testing-api) under the hood. 
+It is easy to use - just add it to your workflow and configure the request details. You can specify the `Target URL`, `Locations` and `Fail If` scenarios to fail the pipeline based on latencies. This action uses Ddosify [Latency Testing API](https://docs.ddosify.com/cloud/api/latency-testing-api) under the hood. 
 
 ⚠️ This action uses [Ddosify Cloud API Key](https://app.ddosify.com) that you can store in [Github Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
 
@@ -16,7 +16,7 @@ Using this action is simple - just add it to your workflow and configure the req
 
 | input     | required | default | example               | description                                                                                                                                                                                          |
 |-----------|----------|---------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| api_key   | true     |         |                       | Ddosify Cloud API Key. Available in https://app.ddosify.com. Account Settings. You can store Ddosify API key in [Github Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).|
+| api_key   | true     |         |                       | Ddosify Cloud API Key. Instructions are available in [Ddosify Docs](https://docs.ddosify.com/cloud/api#get-your-api-key). You can store Ddosify API key in [Github Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).|
 | target    | true     |         | `"https://ddosify.com"` | Target URL or IP address for your endpoint                                                                                                                                                           |
 | locations | false    | `'["*"]'` | `'["NA.*"]'`            | Locations where the requests will sent from. The example gets the latencies from all the available cities from North America (NA) Continent. Examples for [locations](#locations)  |
 | failIf    | false    |         | `"EU.*>100"`            | Fail the pipeline if the locations latency is greater than the specified milliseconds (ms)latency. Valid Examples: `"any>100"`, `"NA.US.MA.BO>50"`, `"NA.*>80"`                                            |
@@ -24,9 +24,9 @@ Using this action is simple - just add it to your workflow and configure the req
 
 ## Usage
 
-Once every `1 hour`, this action gets the latencies of the target url (`"https://app.servdown.com"`) all over the world and will fail if any of Europe (EU) city's latency is greater than 100ms. 
+You can configure this action on each [commit & push](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-workflow-only-when-a-push-to-specific-branches-occurs), [PR](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request) or run it [periodically](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule). Below example shows the periodic usage. Once every `1 hour`, this action gets the latencies of the target url (`"https://app.servdown.com"`) all over the world and will fail if any of Europe (EU) city's latency is greater than 100ms.
 
-💡 You can store [Ddosify Cloud API Key](https://app.ddosify.com) in [Github Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
+💡 You can store [Ddosify Cloud API Key](https://docs.ddosify.com/cloud/api#get-your-api-key) in [Github Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
 
 
 
@@ -56,7 +56,7 @@ jobs:
 
 ### locations
 
-You can get the location name and codes from [example output](#example-output).
+You can get the location name and codes from [example output](#example-output). Supported locations are accesible via [Ddosify API](https://docs.ddosify.com/cloud/api/latency-testing-api#get-supported-locations).
 
 | Example              | Description                                           |
 |----------------------|-------------------------------------------------------|
@@ -153,7 +153,10 @@ Locations: *
 ## Communication
 
 You can join our [Discord Server](https://discord.gg/9KdnrSUZQg) for issues, feature requests, feedbacks or anything else. 
+## More
+
+You can write your own latency testing actions using [Ddosify Latency Testing API](https://docs.ddosify.com/cloud/api/latency-testing-api) and use Latency Testing feature on [Ddosify Cloud](https://app.ddosify.com/latency/new-test).
 
 ## License
 
-Licensed under the MIT: https://github.com/ddosify/ddosify-latency-action/blob/master/LICENSE
+Licensed under the [MIT](https://github.com/ddosify/ddosify-latency-action/blob/master/LICENSE).
