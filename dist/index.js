@@ -10257,7 +10257,7 @@ async function run() {
     let failedLocations = []
     response = {}
     if (failIfText !== "") {
-      core.info(`Fail if: ${failIfText}`)
+      core.info(`\u001b[33mFail if: ${failIfText}`)
     }
     for (let locKey in responseTest.data) {
       response[locKey+1] = { ...{ "location": locations[locKey] }, ...{ "location_code": locKey }, ...responseTest.data[locKey] }
