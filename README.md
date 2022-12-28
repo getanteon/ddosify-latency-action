@@ -18,7 +18,7 @@ Using this action is simple - just add it to your workflow and configure the req
 |-----------|----------|---------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | api_key   | true     |         |                       | Ddosify Cloud API Key. Available in https://app.ddosify.com. Account Settings. You can store Ddosify API key in [Github Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).|
 | target    | true     |         | `"https://ddosify.com"` | Target URL or IP address for your endpoint                                                                                                                                                           |
-| locations | false    | `'["*"]'` | `'["NA.*"]'`            | Locations where the requests will sent from. The example gets the latencies from all the available cities from North America (NA) Continent. Examples: [locations](#locations)  |
+| locations | false    | `'["*"]'` | `'["NA.*"]'`            | Locations where the requests will sent from. The example gets the latencies from all the available cities from North America (NA) Continent. Examples for [locations](#locations)  |
 | failIf    | false    |         | `"EU.*>100"`            | Fail the pipeline if the locations latency is greater than the specified milliseconds (ms)latency. Valid Examples: `"any>100"`, `"NA.US.MA.BO>50"`, `"NA.*>80"`                                            |
 
 
