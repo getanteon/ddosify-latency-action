@@ -60,8 +60,9 @@ async function run() {
     );
 
     response = {}
+    startIndex = 1
     for (let locKey in responseTest.data) {
-      response[`${locations[locKey]} (${locKey.split(".")[0]})`] = responseTest.data[locKey]
+      response[startIndex++] = { ...{ "location": locations[locKey] }, ...{ "location_code": locKey }, ...responseTest.data[locKey] }
     }
     core.setOutput("result", response);
     console.table(response);
