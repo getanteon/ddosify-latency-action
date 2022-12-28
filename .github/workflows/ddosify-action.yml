@@ -3,7 +3,6 @@ name: "Ddosify Latency Testing"
 on:
   schedule:
     - cron:  '* * * * *'
-  workflow_dispatch:
 
 jobs:
   latency-test:
