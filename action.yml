@@ -11,8 +11,8 @@ inputs:
     description: 'Locations where the requests will sent from. Example: ["NA.US.*", "EU.FR.PR"]. Full list: https://docs.ddosify.com/cloud/api/latency-testing-api#get-supported-locations'
     required: false
     default: '["*"]'
-  assert:
-    description: 'Assert locations based on latencies. If you want to fail the pipeline if any of locations latency is greater than 100ms, you can use: any>100 If you want to use specific location, you can use: NA.US.MA.BO>100'
+  failIf:
+    description: 'Fail the pipeline if any of locations latency is greater than 100ms, you can use: any>100. To use specific location, you can use: NA.US.MA.BO>100'
     required: false
 outputs:
   result:
