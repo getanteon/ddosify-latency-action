@@ -10266,15 +10266,16 @@ async function run() {
         failedLocations.push(`${latency},${locations[locKey]},${failIfLatency}`)
       }
     }
+    core.setOutput("result", response);
+    console.table(response);
+
     for (let i in failedLocations) {
       const fLoc = failedLocations[i].split(",")
-      core.error(`Latency (${fLoc[0]}) for ${fLoc[1]} is greater than ${fLoc[2]}.`);
+      core.error(`${fLoc[1]} latency: ${fLoc[0]}ms > ${fLoc[2]}ms.`);
     }
     if (failedLocations.length > 0) {
       core.setFailed("")
     }
-    core.setOutput("result", response);
-    console.table(response);
 
   } catch (error) {
     if (error.response && error.response.status === 401) {
