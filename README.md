@@ -56,7 +56,7 @@ jobs:
 
 ### locations
 
-You can get the location name and codes from [example output](#example-output). Supported locations are accesible via [Ddosify API](https://docs.ddosify.com/cloud/api/latency-testing-api#get-supported-locations).
+You can get the location name and codes from [example output](#example-output). Supported locations are accessible via [Ddosify API](https://docs.ddosify.com/cloud/api/latency-testing-api#get-supported-locations).
 
 | Example              | Description                                           |
 |----------------------|-------------------------------------------------------|
@@ -149,6 +149,10 @@ Locations: *
 | Zurich               | EU.CH.ZH        |    200      |     26       |    >100      |
 | San Jose             | NA.US.CA.SJ     |    200      |     174      |              |
 ```
+
+## Tutorials / Blog Posts
+
+- https://ddosify.com/blog/ddosify-latency-testing-github-action
 
 ## Communication
 
